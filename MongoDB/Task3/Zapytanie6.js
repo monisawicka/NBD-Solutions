@@ -1,0 +1,12 @@
+printjson(db.people.insertOne({"sex" : "Female",
+"first_name" : "Monika",
+"last_name" : "Sawicka",
+"job" : "Analyst",
+"email" : "s23097@pjwstk.com",
+"location" : {"city" : "Warsaw", "address" : {"streetname" : "Wiejska","streetnumber" : "4"}},
+"description" : "bla bla",
+"height" : "165",
+"weight" : "50",
+"birth_date" : "1997-11-03T14:15:03Z",
+"nationality" : "Poland",
+"credit" : [{"type" : "switch","number" : "8711409182312315","currency" : "EUR","balance" : "10"}]}));

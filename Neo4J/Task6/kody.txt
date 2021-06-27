@@ -1,0 +1,73 @@
+#CZ I
+#1
+MATCH p=shortestPath((d {name:"Darjeeling"})-[*]->(s {name:"Sandakphu"}))RETURN p
+
+#2
+MATCH (darj:town { name: "Darjeeling" }), (sand:peak { name: "Sandakphu" })
+MATCH path = ShortestPath((darj)-[*]->(sand))
+WHERE ALL (r IN relationships(path) WHERE r.winter = "true")
+RETURN path
+
+#3
+MATCH path = (darj:town { name: "Darjeeling" })-[rels*..5]->(sand:peak { name: "Sandakphu" })
+RETURN path, REDUCE(d = 0, r IN rels | d + r.distance) AS total_dist
+ORDER BY total_dist
+
+#CZ II
+
+MATCH (f:Flight) <-[:ASSIGN*]-(t:Ticket)
+with f,MIN(t.price) as cheapest
+SET f.cheapestP = cheapest 
+
+MATCH (f:Flight) <-[:ASSIGN*]-(t:Ticket {class: "business"}) SET f.businessP  = t.price 
+
+MATCH (f:Flight) <-[:ASSIGN*]-(t:Ticket {class: "firstClass"}) SET f.firstClassP  = t.price 
+
+MATCH (f:Flight) <-[:ASSIGN*]-(t:Ticket {class: "economy"})
+SET f.economyP  = t.price 
+SET f.cheapestP = t.cheapestP
+
+MATCH (a:Airport ) <-[:ORIGIN] -(f:Flight)-[:DESTINATION]->(b:Airport)
+create (a)-[r:FLIGHTEXIST {airline: f.airline, businessP: f.businessP,cheapestP: f.cheapestP,economyP: f.economyP,firstClassP: f.firstClassP}]->(b)
+
+#4
+MATCH (a:Airport) -[c]- (:Flight) return a,count(c) ORDER BY count(c) DESC
+
+#5
+MATCH flights = ((:Airport {name: "LAX"}) -[:FLIGHTEXIST*..2]->(:Airport))
+WITH flights, reduce(totalPrice = 0, f IN relationships(flights) |  totalPrice + f.cheapestP) as total
+WHERE total < 3000
+Return flights, total
+
+#6
+MATCH flights = ((:Airport {name: "LAX"}) -[:FLIGHTEXIST*..2]->(:Airport {name: "DAY"}))
+WITH flights, reduce(totalPrice = 0, f IN relationships(flights) |  totalPrice + f.cheapestP)  as total
+Return flights, total ORDER BY total
+
+#7
+MATCH flights = ((:Airport {name: "LAX"}) -[:FLIGHTEXIST*..5]->(a:Airport {name: "DAY"}))
+WITH flights, reduce(totalPrice = 0, f IN relationships(flights) |  totalPrice + f.cheapestP)  as total
+ORDER BY total
+LIMIT 1
+Return flights, total
+
+#8
+MATCH flights = ((:Airport {name: "LAX"}) -[:FLIGHTEXIST*..3]->(a:Airport {name: "DAY"}))
+WITH flights, reduce(totalPrice = 0, f IN relationships(flights) |  totalPrice + f.businessP)  as total
+ORDER BY total
+LIMIT 1
+Return flights, total
+
+
+#9
+MATCH (origin:Airport)-[f:FLIGHTEXIST]->(destination:Airport) 
+WITH f.airline as airline, origin.name + '-'+ destination.name as path
+RETURN airline, Count(Distinct path) as connections
+
+#10
+MATCH path = ((:Airport)-[:FLIGHTEXIST]->(:Airport)- [:FLIGHTEXIST]->(:Airport))
+WITH path, reduce(totalCost = 0, flight in relationships(path) | totalCost + flight.cheapestSeat) as total
+ORDER BY total ASC
+LIMIT 1
+RETURN path,total
+

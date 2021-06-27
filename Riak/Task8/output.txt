@@ -1,0 +1,6 @@
+Dodano dokument
+Dany nowy dokument: {'NBD': True, 'name': 'Monika Sawicka'}
+Zmodyfikowano pole NBD: {'NBD': False, 'name': 'Monika Sawicka'}
+Usunieto dokument
+Pobrany usuniety dokument: None
+

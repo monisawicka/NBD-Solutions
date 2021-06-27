@@ -1,0 +1,92 @@
+﻿[
+  {
+    "path": {
+"start": {
+"identity": 17,
+"labels": [
+          "Airport"
+        ],
+"properties": {
+"name": "DEN"
+        }
+      },
+"end": {
+"identity": 0,
+"labels": [
+          "Airport"
+        ],
+"properties": {
+"name": "SEA"
+        }
+      },
+"segments": [
+        {
+          "start": {
+"identity": 17,
+"labels": [
+              "Airport"
+            ],
+"properties": {
+"name": "DEN"
+            }
+          },
+          "relationship": {
+"identity": 1520,
+"start": 17,
+"end": 0,
+"type": "FLIGHTEXIST",
+"properties": {
+"economyP": 801.0,
+"businessP": 1068,
+"airline": "19977",
+"firstClassP": 1281.6
+            }
+          },
+          "end": {
+"identity": 0,
+"labels": [
+              "Airport"
+            ],
+"properties": {
+"name": "SEA"
+            }
+          }
+        },
+        {
+          "start": {
+"identity": 0,
+"labels": [
+              "Airport"
+            ],
+"properties": {
+"name": "SEA"
+            }
+          },
+          "relationship": {
+"identity": 1683,
+"start": 0,
+"end": 17,
+"type": "FLIGHTEXIST",
+"properties": {
+"economyP": 803.25,
+"businessP": 1071,
+"airline": "19977",
+"firstClassP": 1285.2
+            }
+          },
+          "end": {
+"identity": 17,
+"labels": [
+              "Airport"
+            ],
+"properties": {
+"name": "DEN"
+            }
+          }
+        }
+      ],
+"length": 2.0
+    },
+    "total": null
+  }
+]

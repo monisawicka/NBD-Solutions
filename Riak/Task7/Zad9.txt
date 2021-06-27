@@ -1,0 +1,12 @@
+HTTP/1.1 200 OK
+X-Riak-Vclock: a85hYGBgzGDKBVI8+xkWvi9SzU0EspkymBIZ81gZ5vL43uLLAgA=
+Vary: Accept-Encoding
+Server: MochiWeb/1.1 WebMachine/1.10.9 (cafe not found)
+Link: </buckets/s23097>; rel="up"
+Last-Modified: Sun, 27 Jun 2021 14:52:13 GMT
+ETag: "7Xk3yAd56BIPLQgB9lWrAU"
+Date: Sun, 27 Jun 2021 14:53:01 GMT
+Content-Type: application/json
+Content-Length: 15
+
+{"Warszawa": 1}%    
