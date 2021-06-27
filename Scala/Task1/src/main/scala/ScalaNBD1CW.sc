@@ -39,7 +39,7 @@ def PetlaForP(dniTygodnia: List[String]): String = {
 
 println(PetlaForP(dniTygodnia))
 
-// Petla while (pkt.B)
+// Petla while (pkt.C)
 
 def PetlaWhile(dniTygodnia: List[String]): String = {
   val result = new StringBuilder(dniTygodnia.head)
